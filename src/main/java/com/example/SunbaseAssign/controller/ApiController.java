@@ -5,7 +5,6 @@ import com.example.SunbaseAssign.service.ApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +28,7 @@ public class ApiController {
             String password = loginRequest.getPassword();
             String token = apiService.authenticateUser(loginId, password);
             return ResponseEntity.ok(token);
-        } catch (AuthenticationException e) {
-            // Invalid credentials
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-        } catch (Exception e) {
+        }  catch (Exception e) {
             // Other exceptions
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Here i am");
         }

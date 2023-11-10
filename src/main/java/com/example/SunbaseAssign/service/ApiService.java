@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.security.core.AuthenticationException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,7 +18,9 @@ public class ApiService {
 
     private String accessToken;
 
-    public String authenticateUser(String loginId, String password) throws AuthenticationException {
+    private String url = "https://qa2.sunbasedata.com/sunbase/portal/api/assignment_auth.jsp";
+
+    public String authenticateUser(String loginId, String password){
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -28,7 +30,7 @@ public class ApiService {
         requestBody.put("password", password);
 
         HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity("https://qa2.sunbasedata.com/sunbase/portal/api/assignment_auth.jsp" , requestEntity, String.class);
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity( url, requestEntity, String.class);
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
             String jsonResponse = responseEntity.getBody();
             this.accessToken = extractAccessToken(jsonResponse);
