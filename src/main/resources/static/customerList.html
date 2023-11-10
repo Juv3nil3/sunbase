@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer List</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Customer List</h1>
+<button id="addCustomerBtn" onclick="redirectToCreateCustomer()">Add Customer</button>
+
+<table id="customerTable">
+    <!-- Table headers -->
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <!-- Table body will be populated dynamically using JavaScript -->
+    <tbody id="customerTableBody"></tbody>
+</table>
+
+<script src="/js/customerList.js"></script>
+</body>
+</html>

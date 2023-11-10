@@ -49,7 +49,7 @@ public class ApiService {
         }
     }
 
-    public String getAccessToken() {
+    private String getAccessToken() {
         return this.accessToken; // Method to retrieve the saved access token
     }
 
