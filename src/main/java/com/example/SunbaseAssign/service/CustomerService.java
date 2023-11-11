@@ -42,6 +42,9 @@ public class CustomerService {
                 entity,
                 String.class);
 
+        System.out.println("Response Body: " + response.getBody());
+
+
         if (response.getStatusCode() == HttpStatus.CREATED) {
             return "Customer created successfully";
         } else {
@@ -102,6 +105,10 @@ public class CustomerService {
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL)
                 .queryParam("cmd", "update")
                 .queryParam("uuid", uuid);
+
+        System.out.println(uuid);
+        System.out.println(customerRequest);
+        System.out.println(authToken);
 
         HttpEntity<?> entity = new HttpEntity<>(customerRequest, headers);
         ResponseEntity<String> response = restTemplate.exchange(

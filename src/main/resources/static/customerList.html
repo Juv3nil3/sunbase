@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Customer List</h1>
-<button id="addCustomerBtn" onclick="redirectToCreateCustomer()">Add Customer</button>
+<button class="addCustomerBtn" onclick="redirectToCreateCustomer()">Add Customer</button>
 
 <table id="customerTable">
     <!-- Table headers -->
@@ -27,6 +27,8 @@
     <!-- Table body will be populated dynamically using JavaScript -->
     <tbody id="customerTableBody"></tbody>
 </table>
+
+<div id="errorMessage"></div>
 
 <script src="/js/customerList.js"></script>
 </body>

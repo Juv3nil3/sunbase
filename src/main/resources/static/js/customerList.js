@@ -47,14 +47,13 @@ function renderCustomerList(customerList) {
         row.innerHTML = `
             <td>${customer.first_name}</td>
             <td>${customer.last_name}</td>
-            <td>${customer.street}</td>
             <td>${customer.address}</td>
             <td>${customer.city}</td>
             <td>${customer.state}</td>
             <td>${customer.email}</td>
             <td>${customer.phone}</td>
-            <td>
-                <button onclick="deleteCustomer('${customer.uuid}')">Delete</button>
+            <td class="button-group">
+                <button class="delete" onclick="deleteCustomer('${customer.uuid}')">Delete</button>
                 <button onclick="updateCustomer('${customer.uuid}')">Update</button>
             </td>
         `;
@@ -63,11 +62,55 @@ function renderCustomerList(customerList) {
 }
 
 function deleteCustomer(uuid) {
-    // Implement the logic to delete the customer with the specified UUID
-    console.log(`Delete customer with UUID: ${uuid}`);
+    const accessToken = localStorage.getItem('accessToken');
+    const apiUrl = `/customer/delete/${uuid}`;
+
+    fetch(apiUrl, {
+        method: 'DELETE', // Use DELETE method for deleting resources
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+        },
+    })
+    .then(response => {
+            if (response.ok) {
+                console.log(`Customer with UUID ${uuid} deleted successfully`);
+
+                // Fetch the updated customer list after deletion
+                fetchCustomerList(accessToken);
+            } else if (response.status === 401) {
+
+                console.error('Invalid authorization. Please log in again.');
+                // Redirect to the login page
+                window.location.href = 'login.html';
+            } else if (response.status === 400) {
+                console.error(`Customer with UUID ${uuid} not found.`);
+                displayErrorMessage(`Error: Customer not found with UUID ${uuid}`);
+            } else if (response.status === 500) {
+                displayErrorMessage(`Error: Unable to delete customer with UUID ${uuid}`);
+            } else {
+                // Handle other status codes if needed
+                console.error(`Unexpected response: ${response.status}`);
+            }
+        })
+        .catch(error => {
+            // Handle fetch errors
+            console.error('Delete customer error:', error);
+            // Display a generic error message
+            displayErrorMessage('Error: Something went wrong. Please try again.');
+        });
 }
 
 function updateCustomer(uuid) {
     // Implement the logic to update the customer with the specified UUID
     console.log(`Update customer with UUID: ${uuid}`);
 }
+
+function redirectToCreateCustomer() {
+    // Assuming 'addCustomer.html' is the page where you want to add a new customer
+    window.location.href = 'addCustomer.html';
+}
+function displayErrorMessage(message) {
+        // Display the error message in the HTML
+        errorMessageContainer.innerText = message;
+        errorMessageContainer.style.display = 'block';
+    }

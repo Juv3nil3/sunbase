@@ -46,7 +46,7 @@ public class CustomerController {
         return new ResponseEntity<>(response.getBody(), httpStatus);
     }
 
-    @PutMapping("/update/{uuid}")
+    @PostMapping("/update/{uuid}")
     public ResponseEntity<String> updateCustomer(@PathVariable("uuid") String uuid,
                                                  @RequestBody CustomerRequest customerRequest,
                                                  @RequestHeader("Authorization") String authToken) {
