@@ -12,8 +12,9 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomerRequest {
+    @NotBlank
     String first_name;
-
+    @NotBlank
     String last_name;
 
     String street;

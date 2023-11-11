@@ -54,7 +54,7 @@ function renderCustomerList(customerList) {
             <td>${customer.phone}</td>
             <td class="button-group">
                 <button class="delete" onclick="deleteCustomer('${customer.uuid}')">Delete</button>
-                <button onclick="updateCustomer('${customer.uuid}')">Update</button>
+                <button onclick="redirectToUpdateCustomer('${customer.uuid}')">Update</button>
             </td>
         `;
         tableBody.appendChild(row);
@@ -73,7 +73,7 @@ function deleteCustomer(uuid) {
     })
     .then(response => {
             if (response.ok) {
-                console.log(`Customer with UUID ${uuid} deleted successfully`);
+                console.log('Customer deleted successfully');
 
                 // Fetch the updated customer list after deletion
                 fetchCustomerList(accessToken);
@@ -83,10 +83,10 @@ function deleteCustomer(uuid) {
                 // Redirect to the login page
                 window.location.href = 'login.html';
             } else if (response.status === 400) {
-                console.error(`Customer with UUID ${uuid} not found.`);
-                displayErrorMessage(`Error: Customer not found with UUID ${uuid}`);
+
+                displayErrorMessage('Customer not found with UUID');
             } else if (response.status === 500) {
-                displayErrorMessage(`Error: Unable to delete customer with UUID ${uuid}`);
+                displayErrorMessage('Unable to delete customer with UUID');
             } else {
                 // Handle other status codes if needed
                 console.error(`Unexpected response: ${response.status}`);
@@ -100,9 +100,9 @@ function deleteCustomer(uuid) {
         });
 }
 
-function updateCustomer(uuid) {
+function redirectToUpdateCustomer(uuid) {
     // Implement the logic to update the customer with the specified UUID
-    console.log(`Update customer with UUID: ${uuid}`);
+    window.location.href = `updateCustomer.html?uuid=${uuid}`;
 }
 
 function redirectToCreateCustomer() {

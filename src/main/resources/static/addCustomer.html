@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>Add Customer</h1>
+    <div id="errorMessage" class="error-message"></div>
 
     <form id="addCustomerForm">
         <label for="firstName">First Name:</label>
@@ -34,10 +35,10 @@
         <label for="phone">Phone:</label>
         <input type="tel" id="phone" name="phone"><br>
 
-        <button class="addCustomerBtn" type="submit" onclick="addCustomer()">Add Customer</button>
+        <button class="addCustomerBtn" type="submit">Add Customer</button>
     </form>
 
-    <div id="errorMessage" class="error-message"></div>
+
 
 <script src="/js/addCustomer.js"></script>
 </body>

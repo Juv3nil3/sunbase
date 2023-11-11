@@ -72,17 +72,6 @@ input[type="submit"]:hover {
     border-radius: 4px;
 }
 
-#addCustomerBtn {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
-
 .addCustomerBtn {
     background-color: #3498db;
     color: #fff;
@@ -143,3 +132,4 @@ input[type="submit"]:hover {
 .button-group {
     white-space: nowrap;
 }
+

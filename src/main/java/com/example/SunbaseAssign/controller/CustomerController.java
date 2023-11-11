@@ -4,6 +4,7 @@ import com.example.SunbaseAssign.dto.request.CustomerRequest;
 import com.example.SunbaseAssign.model.Customer;
 import com.example.SunbaseAssign.service.CustomerService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("/create")
-    public ResponseEntity<String> createCustomer (@RequestBody CustomerRequest customerRequest,
+    public ResponseEntity<String> createCustomer (@Valid @RequestBody CustomerRequest customerRequest,
                                                   @RequestHeader("Authorization") String authorizationHeader) {
         try {
             String response = customerService.createCustomer(customerRequest, authorizationHeader);

@@ -1,15 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const uuid = urlParams.get('uuid');
 
-    const addCustomerForm = document.getElementById('addCustomerForm');
+    const updateCustomerForm = document.getElementById('updateCustomerForm');
 
-    addCustomerForm.addEventListener('submit', function(e) {
+    updateCustomerForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        addCustomer();
+        updateCustomer();
     });
-
-    function addCustomer() {
+        function updateCustomer() {
         const accessToken = localStorage.getItem('accessToken');
-        const apiUrl = `/customer/create`;
+        const apiUrl = `/customer/update/${uuid}`;
 
         if (!accessToken) {
             window.location.href = 'login.html';
@@ -28,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
 
-
         fetch(apiUrl, {
             method: 'POST',
             headers: {
@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => {
             if (response.ok) {
                 const statusCode = response.status;
-                if (statusCode === 201) {
-                    console.log('Customer added successfully');
+                if (statusCode === 200) {
+                    console.log('Customer updated successfully');
                     window.location.href = 'customerList.html';
                 } else {
                     displayErrorMessage('Unexpected success. Please try again.');
@@ -62,8 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .catch(error => {
-            console.error('Add customer error:', error);
-            displayErrorMessage('Failed to add customer. Please try again.');
+            console.error('Update customer error:', error);
+            displayErrorMessage('Failed to update customer. Please try again.');
         });
     }
 
